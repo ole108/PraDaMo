@@ -2,6 +2,12 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+# Import Secure routes: /login and /logout
+*       /                                       module:secure
+
+# Import CRUD routes
+*		/admin              					module:crud
+
 # Home page
 GET     /                                       Application.index
 

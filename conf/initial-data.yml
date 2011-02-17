@@ -1,0 +1,58 @@
+# Test data
+
+SecUser(admin):
+    email:          admin@diamand-tec.org
+    passwordHash:   secret
+    fullname:       Administrator
+    isAdmin:        true
+
+SecUser(user):
+    email:          user@gmail.com
+    passwordHash:   secret
+    fullname:       Normal user
+
+
+TecStack(play):
+    packageName:    play
+    displayName:    Play framework
+    description:    >
+                    Play framework including Hibernate and other dependencies
+ 
+
+Project(PraDaMo):
+    projectName:    Diamand - PraDaMo (Pragmatic Data Modelling)
+    projectDirectory:   PraDaMo
+    description:    >
+                    Here we try to eat our own dog food.
+    tecStack:       play
+    loginRequired:  true
+    withAuthorization:  false
+
+
+RecordType(tecStack):
+    entityName:     TecStack
+    displayName:    Technology stack
+    description:    >
+                    A technology stack like J2EE, Spring (framework, WebMVC, ...), Play framework, ... 
+    project:        PraDaMo
+
+RecordType(project):
+    entityName:     Project
+    displayName:    Project
+    description:    >
+                    A project implemented using a specific technology stack.
+    project:        PraDaMo
+
+RecordType(package):
+    entityName:     Package
+    displayName:    Package
+    description:    >
+                    Entities can be structured using packages.
+    project:        PraDaMo
+
+RecordType(entity):
+    entityName:     Entity
+    displayName:    Entity
+    description:    >
+                    Usually a database table and a Java class.
+    project:        PraDaMo
