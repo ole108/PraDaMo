@@ -1,14 +1,14 @@
 # Test data
 
 SecUser(admin):
-    email:          admin@diamand-tec.org
-    passwordHash:   secret
+    email:          admin
+    passwordHash:   5434b846b286a2406a8ed2cb62627235
     fullname:       Administrator
     isAdmin:        true
 
 SecUser(user):
     email:          user@gmail.com
-    passwordHash:   secret
+    passwordHash:   8f8a3a6d06eeaf63b8c956f94fa48501
     fullname:       Normal user
 
 

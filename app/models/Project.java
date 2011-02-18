@@ -2,10 +2,14 @@
 // See the file 'COPYING' in the root directory for further information.
 package models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import play.data.validation.Match;
 import play.data.validation.MaxSize;
@@ -57,6 +61,9 @@ public class Project extends Model {
 	// TODO: This should be supported when we have integrated Apache Shiro.
 	@Column(nullable = false)
 	public boolean	withAuthorization	= false;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date		lastGeneratedAt		= null;
 
 	public Project(String projectName, String projectDirectory, String basePackage, String description,
 			TecStack tecStack) {

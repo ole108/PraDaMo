@@ -3,6 +3,7 @@
 package controllers;
 
 import models.SecUser;
+import play.libs.Crypto;
 
 
 /**
@@ -12,7 +13,8 @@ import models.SecUser;
  */
 public class Security extends controllers.Secure.Security {
 	static boolean authenticate(String username, String password) {
-		return SecUser.connect(username, password) != null;
+		String passwordHash = Crypto.encryptAES(password);
+		return SecUser.connect(username, passwordHash) != null;
 	}
 
 	static boolean check(String permission) {

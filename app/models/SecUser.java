@@ -46,7 +46,6 @@ public class SecUser extends Model {
 	}
 
 	public static SecUser connect(String email, String passwordHash) {
-		// Crypto.passwordHash(passwordHash);
 		return find("byEmailAndPasswordHash", email, passwordHash).first();
 	}
 
