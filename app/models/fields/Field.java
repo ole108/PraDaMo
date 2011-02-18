@@ -1,6 +1,6 @@
 // Released under the terms of the Apache License, Version 2.0 or later.
 // See the file 'COPYING' in the root directory for further information.
-package models;
+package models.fields;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +8,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
+import models.RecordType;
 import play.data.validation.Match;
 import play.data.validation.MaxSize;
 import play.data.validation.MinSize;
@@ -40,6 +41,9 @@ public class Field extends Model {
 
 	@Column(nullable = false)
 	public boolean		required	= false;
+
+	@Column(nullable = false)
+	public boolean		isUnique	= false;
 
 	public Field(String fieldName, String displayName, RecordType entity) {
 		this.fieldName = fieldName;

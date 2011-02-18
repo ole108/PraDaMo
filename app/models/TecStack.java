@@ -22,13 +22,13 @@ public class TecStack extends Model {
 	@MinSize(value = 3)
 	@MaxSize(32)
 	@Match("[a-zA-Z0-9_]*")
-	@Column(nullable = false, length = 32)
+	@Column(nullable = false, unique = true, length = 32)
 	public String	packageName;
 
 	@Required
 	@MinSize(value = 3)
 	@MaxSize(64)
-	@Column(nullable = false, length = 64)
+	@Column(nullable = false, unique = true, length = 64)
 	public String	displayName;
 
 	@Lob

@@ -1,6 +1,6 @@
 // Released under the terms of the Apache License, Version 2.0 or later.
 // See the file 'COPYING' in the root directory for further information.
-package models;
+package models.fields;
 
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -8,11 +8,13 @@ import java.util.regex.PatternSyntaxException;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import models.RecordType;
 import net.sf.oval.constraint.ValidateWithMethod;
 import play.data.validation.Check;
 import play.data.validation.CheckWith;
 import play.data.validation.Max;
 import play.data.validation.MaxSize;
+import play.data.validation.Min;
 import play.data.validation.Required;
 import validation.BiggerThan;
 
@@ -23,37 +25,31 @@ import validation.BiggerThan;
 @Entity
 @ValidateWithMethod(methodName = "isValid", parameterType = StringField.class)
 public class StringField extends Field {
-	@Column(nullable = false)
-	public boolean	isLob	= false;
-
+	@Min(0)
 	@Max(1000)
 	public Integer	minLen;
 
 	@Required
+	@Min(1)
 	@Max(1000000)
 	@BiggerThan("minLen")
 	@Column(nullable = false)
 	public Integer	maxLen;
 
-	@MaxSize(128)
+	@MaxSize(96)
 	@CheckWith(RegexCheck.class)
 	@Column(length = 96)
 	public String	regex;
 
-	public StringField(String fieldName, String displayName, RecordType entity) {
+	public StringField(String fieldName, String displayName, RecordType entity, int maxLen) {
 		super(fieldName, displayName, entity);
+
+		this.maxLen = maxLen;
 	}
 
+	/** Just for documentation purposes. */
 	public boolean isValid(StringField objToValidate) {
-		if (objToValidate.minLen == null || objToValidate.maxLen == null) {
-			return true;
-		}
-		return objToValidate.minLen <= objToValidate.maxLen;
-	}
-
-	public StringField save() {
-		isLob = maxLen > 100; // This is the way play decides between text and largetext
-		return super.save();
+		return true;
 	}
 
 	static class RegexCheck extends Check {

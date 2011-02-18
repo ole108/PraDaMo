@@ -1,13 +1,13 @@
 # Test data
 
 SecUser(admin):
-    email:          admin
+    email:          "admin"
     passwordHash:   5434b846b286a2406a8ed2cb62627235
     fullname:       Administrator
     isAdmin:        true
 
 SecUser(user):
-    email:          user@gmail.com
+    email:          "user@gmail.com"
     passwordHash:   8f8a3a6d06eeaf63b8c956f94fa48501
     fullname:       Normal user
 
@@ -29,16 +29,22 @@ Project(PraDaMo):
     withAuthorization:  false
 
 
+Package(fields):
+    packageName:    "fields"
+    displayName:    "Fields"
+    project:        PraDaMo
+
+
 RecordType(tecStack):
-    entityName:     TecStack
+    entityName:     "TecStack"
     displayName:    Technology stack
     description:    >
                     A technology stack like J2EE, Spring (framework, WebMVC, ...), Play framework, ... 
     project:        PraDaMo
 
-RecordType(project):
-    entityName:     Project
-    displayName:    Project
+RecordType(projectRec):
+    entityName:     "Project"
+    displayName:    "Project"
     description:    >
                     A project implemented using a specific technology stack.
     project:        PraDaMo
@@ -56,3 +62,109 @@ RecordType(entity):
     description:    >
                     Usually a database table and a Java class.
     project:        PraDaMo
+
+
+# =========================================================================
+# A L L   F I E L D S
+# =========================================================================
+
+# Fields for TecStack:
+
+fields.StringField(ts1):
+    fieldName:      packageName
+    displayName:    Package/directory name
+    entity:         tecStack
+    required:       true
+    isUnique:       true
+    minLen:         3
+    maxLen:         32
+    regex:          "^[a-zA-Z0-9_]*$"
+
+fields.StringField(ts2):
+    fieldName:      displayName
+    displayName:    Display name
+    entity:         tecStack
+    required:       true
+    isUnique:       true
+    minLen:         3
+    maxLen:         64
+
+fields.StringField(ts3):
+    fieldName:      description
+    displayName:    Description
+    entity:         tecStack
+    required:       true
+    minLen:         10
+    maxLen:         10000
+
+
+# Fields for Project:
+
+fields.StringField(pr1):
+    fieldName:      projectName
+    displayName:    "Project name"
+    entity:         projectRec
+    required:       true
+    isUnique:       true
+    minLen:         3
+    maxLen:         64
+
+fields.StringField(pr2):
+    fieldName:      projectDirectory
+    displayName:    "Project directory"
+    entity:         projectRec
+    required:       true
+    isUnique:       true
+    minLen:         3
+    maxLen:         96
+    regex:          "^[a-zA-Z0-9_/]*$"
+
+
+fields.StringField(pr3):
+    fieldName:      basePackage
+    displayName:    Base package
+    entity:         projectRec
+    minLen:         3
+    maxLen:         96
+    regex:          "^[a-zA-Z0-9_.]*$"
+
+fields.StringField(pr4):
+    fieldName:      description
+    displayName:    Description
+    entity:         projectRec
+    required:       true
+    minLen:         10
+    maxLen:         10000
+
+fields.ManyToOneField(pr5):
+    fieldName:      "tecStack"
+    displayName:    Technology stack
+    entity:         projectRec
+    required:       true
+    fieldType:      tecStack
+
+
+# Fields for Package:
+fields.StringField(pa1):
+    fieldName:      packageName
+    displayName:    Package name
+    entity:         package
+    required:       true
+    minLen:         3
+    maxLen:         96
+    regex:          "^[a-zA-Z0-9_]*$"
+
+fields.StringField(pa2):
+    fieldName:      displayName
+    displayName:    Display name
+    entity:         package
+    required:       true
+    minLen:         3
+    maxLen:         64
+
+fields.ManyToOneField(pa3):
+    fieldName:      "project"
+    displayName:    "Project"
+    entity:         package
+    required:       true
+    fieldType:      projectRec

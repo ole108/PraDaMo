@@ -21,7 +21,8 @@ import play.db.jpa.Model;
 public class SecUser extends Model {
 	@Email
 	@Required
-	@Column(nullable = false, length = 100)
+	@MaxSize(96)
+	@Column(nullable = false, unique = true, length = 96)
 	public String	email;
 
 	@Required

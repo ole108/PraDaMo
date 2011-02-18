@@ -26,16 +26,17 @@ public class Project extends Model {
 	@Required
 	@MinSize(value = 3)
 	@MaxSize(64)
-	@Column(nullable = false, length = 64)
+	@Column(nullable = false, unique = true, length = 64)
 	public String	projectName;
 
 	@Required
 	@MinSize(value = 3)
-	@MaxSize(32)
-	@Match("[a-zA-Z0-9_]*")
-	@Column(nullable = false, length = 32)
+	@MaxSize(96)
+	@Match("[a-zA-Z0-9_/]*")
+	@Column(nullable = false, unique = true, length = 96)
 	public String	projectDirectory;
 
+	@MinSize(value = 3)
 	@MaxSize(96)
 	@Match("[a-zA-Z0-9_.]*")
 	@Column(length = 96)
