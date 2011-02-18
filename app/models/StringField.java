@@ -14,6 +14,7 @@ import play.data.validation.CheckWith;
 import play.data.validation.Max;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
+import validation.BiggerThan;
 
 
 /**
@@ -30,6 +31,7 @@ public class StringField extends Field {
 
 	@Required
 	@Max(1000000)
+	@BiggerThan("minLen")
 	@Column(nullable = false)
 	public Integer	maxLen;
 
