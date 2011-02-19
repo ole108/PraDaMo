@@ -2,18 +2,18 @@
 
 SecUser(admin):
     email:          "admin"
-    passwordHash:   5434b846b286a2406a8ed2cb62627235
+    passwordHash:   "5434b846b286a2406a8ed2cb62627235"
     fullname:       Administrator
     isAdmin:        true
 
 SecUser(user):
     email:          "user@gmail.com"
-    passwordHash:   8f8a3a6d06eeaf63b8c956f94fa48501
+    passwordHash:   "8f8a3a6d06eeaf63b8c956f94fa48501"
     fullname:       Normal user
 
 
 TecStack(play):
-    packageName:    play
+    packageName:    "play"
     displayName:    Play framework
     description:    >
                     Play framework including Hibernate and other dependencies

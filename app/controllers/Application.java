@@ -1,16 +1,18 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
+import generator.ProjectGenerator;
+import models.Project;
+import play.mvc.Controller;
 
-import java.util.*;
-
-import models.*;
 
 public class Application extends Controller {
 
-    public static void index() {
-        render();
-    }
+	public static void index() {
+		render();
+	}
 
+	public static void generate(Long projectId) {
+		new ProjectGenerator(Project.<Project> findById(projectId)).generateProject();
+		render();
+	}
 }
