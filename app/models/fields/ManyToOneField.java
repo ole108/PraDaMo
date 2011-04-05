@@ -4,6 +4,7 @@ package models.fields;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 import models.RecordType;
 import play.data.validation.Match;
@@ -15,10 +16,7 @@ import play.data.validation.Required;
 @Entity
 public class ManyToOneField extends Field {
 	@Required
-	@MinSize(value = 3)
-	@MaxSize(32)
-	@Match("[a-zA-Z0-9_]*")
-	@Column(nullable = false, length = 32)
+	@ManyToOne(optional = false)
 	public RecordType	fieldType;
 
 	@MinSize(value = 3)

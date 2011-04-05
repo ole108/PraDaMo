@@ -4,6 +4,7 @@ package models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
@@ -24,43 +25,45 @@ public class RecordType extends Model {
 	@MaxSize(32)
 	@Match("[a-zA-Z0-9_]*")
 	@Column(nullable = false, length = 32)
-	public String		entityName;
+	public String			entityName;
 
 	@Required
 	@MinSize(value = 3)
 	@MaxSize(64)
 	@Column(nullable = false, length = 64)
-	public String		displayName;
+	public String			displayName;
 
 	@Lob
 	@MaxSize(10000)
-	public String		description;
+	public String			description;
 
 	@ManyToOne
-	public Package		parentPackage;
+	public Package			parentPackage;
 
 	@Required
 	@ManyToOne(optional = false)
-	public Project		project;
-
-	// Can be used for decoupling generated stuff from hand written code.
-	// The generated base class has to do:
-	// @MappedSuperclass
-	// public class GeneratedBaseEntity { ... }
-	@Column(nullable = false)
-	public boolean		generateSubclass	= false;
-
-	@Column(nullable = false)
-	public boolean		isBaseEntity		= false;
+	public Project			project;
 
 	@ManyToOne
-	public RecordType	baseEntity			= null;
+	public RecordType		baseEntity		= null;
 
-	public RecordType(String entityName, String displayName, String description, Package parentPackage, Project project) {
+	@Column
+	public InheritanceType	inheritanceType	= null;
+
+	/*
+	 * Can be used later for decoupling generated stuff from hand written code.
+	 * The generated base class has to do:
+	 * 
+	 * @MappedSuperclass
+	 * public class GeneratedBaseEntity { ... }
+	 * 
+	 * @Column(nullable = false)
+	 * public boolean generateSubclass = false;
+	 */
+
+	public RecordType(String entityName, String displayName, Project project) {
 		this.entityName = entityName;
 		this.displayName = displayName;
-		this.description = description;
-		this.parentPackage = parentPackage;
 		this.project = project;
 	}
 

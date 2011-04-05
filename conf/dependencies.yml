@@ -1,0 +1,7 @@
+# Application dependencies
+    
+require:
+    - play 1.2RC2
+    - play -> secure 1.2RC2
+    - play -> crud 1.2RC2
+    - org.apache.commons -> commons-exec 1.1

@@ -63,6 +63,69 @@ RecordType(entity):
                     Usually a database table and a Java class.
     project:        PraDaMo
 
+RecordType(field):
+    entityName:     Field
+    displayName:    Field
+    description:    >
+                    Base of all fields.
+    project:        PraDaMo
+    parentPackage:  fields
+    inheritanceType: JOINED
+
+RecordType(boolField):
+    entityName:     BoolField
+    displayName:    Boolean field
+    description:    >
+                    A boolean field.
+    project:        PraDaMo
+    parentPackage:  fields
+    baseEntity:     field
+
+RecordType(dateField):
+    entityName:     DateField
+    displayName:    Date field
+    description:    >
+                    A date field.
+    project:        PraDaMo
+    parentPackage:  fields
+    baseEntity:     field
+
+RecordType(emailField):
+    entityName:     EmailField
+    displayName:    EMail field
+    description:    >
+                    An EMail field.
+    project:        PraDaMo
+    parentPackage:  fields
+    baseEntity:     field
+
+RecordType(intField):
+    entityName:     IntField
+    displayName:    Integer field
+    description:    >
+                    A integer field.
+    project:        PraDaMo
+    parentPackage:  fields
+    baseEntity:     field
+
+RecordType(many2oneField):
+    entityName:     ManyToOneField
+    displayName:    "Many-to-one field"
+    description:    >
+                    A boolean field.
+    project:        PraDaMo
+    parentPackage:  fields
+    baseEntity:     field
+
+RecordType(stringField):
+    entityName:     StringField
+    displayName:    String field
+    description:    >
+                    A string field.
+    project:        PraDaMo
+    parentPackage:  fields
+    baseEntity:     field
+
 
 # =========================================================================
 # A L L   F I E L D S
@@ -145,6 +208,7 @@ fields.ManyToOneField(pr5):
 
 
 # Fields for Package:
+
 fields.StringField(pa1):
     fieldName:      packageName
     displayName:    Package name
@@ -168,3 +232,85 @@ fields.ManyToOneField(pa3):
     entity:         package
     required:       true
     fieldType:      projectRec
+
+
+# Fields for RecordType:
+
+fields.StringField(rt1):
+    fieldName:      entityName
+    displayName:    Entity name
+    entity:         entity
+    required:       true
+    minLen:         3
+    maxLen:         32
+    regex:          "^[a-zA-Z0-9_]*$"
+
+fields.StringField(rt2):
+    fieldName:      displayName
+    displayName:    Display name
+    entity:         entity
+    required:       true
+    minLen:         3
+    maxLen:         64
+
+fields.StringField(rt3):
+    fieldName:      description
+    displayName:    Description
+    entity:         entity
+    maxLen:         10000
+
+fields.ManyToOneField(rt4):
+    fieldName:      "package"
+    displayName:    "Package"
+    entity:         entity
+    fieldType:      package
+
+fields.ManyToOneField(rt5):
+    fieldName:      "project"
+    displayName:    "Project"
+    entity:         entity
+    required:       true
+    fieldType:      projectRec
+
+fields.ManyToOneField(rt6):
+    fieldName:      "baseEntity"
+    displayName:    "Base entity"
+    entity:         entity
+    fieldType:      entity
+
+
+# Fields for Field:
+
+# @Inheritance(strategy = InheritanceType.JOINED)
+# public class Field extends Model {
+#	@Required
+#	@MinSize(3)
+#	@MaxSize(32)
+#	@Match("[a-zA-Z0-9_]*")
+#	@Column(nullable = false, length = 32)
+#	public String		fieldName;
+#fields.StringField(rt1):
+#    fieldName:      fieldName
+#    displayName:    Field name
+#    entity:         field
+#    required:       true
+#    minLen:         3
+#    maxLen:         32
+#    regex:          "^[a-zA-Z0-9_]*$"
+#
+#
+#	@Required
+#	@MinSize(3)
+#	@MaxSize(64)
+#	@Column(nullable = false, length = 64)
+#	public String		displayName;
+#
+#	@Required
+#	@ManyToOne(optional = false)
+#	public RecordType	entity;
+#
+#	@Column(nullable = false)
+#	public boolean		required	= false;
+#
+#	@Column(nullable = false)
+#	public boolean		isUnique	= false;
